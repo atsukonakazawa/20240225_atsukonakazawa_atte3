@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Work;
-use App\Models\Day;
 use App\Models\User;
 use App\Models\Breaktime;
 use Illuminate\Support\Facades\Auth;

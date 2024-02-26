@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\BreaktimeController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+
 
 
 /*
@@ -17,10 +21,18 @@ use App\Http\Controllers\BreaktimeController;
 |
 */
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', [AuthController::class,'index']);
-    Route::get('/attendance',[WorkController::class,'sendDay'])->name("form.send-day");
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', [AuthController::class,'index'])->middleware(['verified']);
+    Route::get('/attendance',[WorkController::class,'sendDay'])->middleware(['verified'])->name("form.send-day");
+});
+
+
 
 Route::get('/workIn',[WorkController::class,'workIn'])->name("form.work-in");
 Route::get('/workOut',[WorkController::class,'workOut'])->name("form.work-out");

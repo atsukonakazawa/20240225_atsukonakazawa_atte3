@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Breaktime;
 use App\Models\Work;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\User;
+
 
 
 
